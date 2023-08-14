@@ -30,7 +30,7 @@ const ucsbDiningCommonsMenuItemFixtures = {
             "diningCommonsCode": "ortega",
             "name": "Chicken Caesar Salad",
             "station": "Entrees"        
-        },
+        }
         
     ]
 };
