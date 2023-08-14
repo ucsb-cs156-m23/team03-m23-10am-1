@@ -79,6 +79,16 @@ describe("UCSBDiningCommonsMenuItemIndexPage tests", () => {
         expect(screen.getByTestId(`${testId}-cell-row-1-col-id`)).toHaveTextContent("2");
         expect(screen.getByTestId(`${testId}-cell-row-2-col-id`)).toHaveTextContent("3");
 
+        const createMenuItemButton = screen.queryByText("Create Menu Item");
+        expect(createMenuItemButton).not.toBeInTheDocument();
+
+        const item1 = screen.getByText("Baked Pesto Pasta with Chicken");
+        expect(item1).toBeInTheDocument();
+        const item2 = screen.getByText("Tofu Banh Mi Sandwich (v)");
+        expect(item2).toBeInTheDocument();
+        const item3 = screen.getByText("Chicken Caesar Salad");
+        expect(item3).toBeInTheDocument();
+
         expect(screen.queryByTestId("UCSBDinignCommonsMenuItemTable-cell-row-0-col-Delete-button")).not.toBeInTheDocument();
         expect(screen.queryByTestId("UCSBDinignCommonsMenuItemTable-cell-row-0-col-Edit-button")).not.toBeInTheDocument();
     });
