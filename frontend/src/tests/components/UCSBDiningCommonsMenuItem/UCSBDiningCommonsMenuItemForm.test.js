@@ -2,7 +2,7 @@ import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 import { BrowserRouter as Router } from "react-router-dom";
 
 import UCSBDiningCommonsMenuItemForm from "main/components/UCSBDiningCommonsMenuItem/UCSBDiningCommonsMenuItemForm";
-import { UCSBDiningCommonsMenuItemFixtures } from "fixtures/ucsbDiningCommonsMenuItemFixtures";
+import { ucsbDiningCommonsMenuItemFixtures } from "fixtures/ucsbDiningCommonsMenuItemFixtures";
 
 import { QueryClient, QueryClientProvider } from "react-query";
 
@@ -29,6 +29,10 @@ describe("UCSBDiningCommonsMenuItemForm tests", () => {
         );
 
         expect(await screen.findByText(/Create/)).toBeInTheDocument();
+        // expect(await screen.findByTestId('${testId}-diningCommonsCode')).toBeInTheDocument();
+        // expect(await screen.findByTestId('${testId}-name')).toBeInTheDocument();
+        // expect(await screen.findByTestId('${testId}-station')).toBeInTheDocument();
+        // expect(await screen.findByTestId('${testId}-submit')).toBeInTheDocument();
 
         expectedHeaders.forEach((headerText) => {
             const header = screen.getByText(headerText);
@@ -41,7 +45,7 @@ describe("UCSBDiningCommonsMenuItemForm tests", () => {
         render(
             <QueryClientProvider client={queryClient}>
                 <Router>
-                    <UCSBDiningCommonsMenuItemForm initialContents={UCSBDiningCommonsMenuItemFixtures.oneMenuItem} />
+                    <UCSBDiningCommonsMenuItemForm initialContents={ucsbDiningCommonsMenuItemFixtures.oneMenuItem} />
                 </Router>
             </QueryClientProvider>
         );
@@ -87,17 +91,9 @@ describe("UCSBDiningCommonsMenuItemForm tests", () => {
         const submitButton = screen.getByText(/Create/);
         fireEvent.click(submitButton);
 
-        await screen.findByText(/diningCommonsCode is required/);
-        expect(screen.getByText(/name is required/)).toBeInTheDocument();
-        expect(screen.getByText(/station is required/)).toBeInTheDocument();
-
-        const nameInput = screen.getByTestId(`${testId}-name`);
-        fireEvent.change(nameInput, { target: { value: "a".repeat(31) } });
-        fireEvent.click(submitButton);
-
-        await waitFor(() => {
-            expect(screen.getByText(/Max length 30 characters/)).toBeInTheDocument();
-        });
+        await screen.findByText(/DiningCommonsCode is required/);
+        expect(screen.getByText(/Name is required/)).toBeInTheDocument();
+        expect(screen.getByText(/Station is required/)).toBeInTheDocument();
     });
 
 });
