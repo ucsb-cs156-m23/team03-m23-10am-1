@@ -52,7 +52,7 @@ describe("MenuItemReviewForm tests", () => {
         expect(screen.getByText(/Reviewer Email is required./)).toBeInTheDocument();
         expect(screen.getByText(/Stars is required./)).toBeInTheDocument();
         expect(screen.getByText(/Date Reviewed is required./)).toBeInTheDocument();
-        expect(screen.getByText(/Comments is required./)).toBeInTheDocument();
+        expect(screen.getByText(/Comments are required./)).toBeInTheDocument();
     });
 
     test("No Error messsages on good input", async () => {
