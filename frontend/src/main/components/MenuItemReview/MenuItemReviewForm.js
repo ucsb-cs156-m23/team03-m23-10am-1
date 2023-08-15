@@ -15,7 +15,7 @@ function MenuItemReviewForm({ initialContents, submitAction, buttonLabel = "Crea
     // Stryker restore all
 
     const navigate = useNavigate();
-
+    
     // Stryker disable next-line Regex
     const int_regex = /\d+/;
     // Stryker disable next-line Regex
@@ -24,6 +24,7 @@ function MenuItemReviewForm({ initialContents, submitAction, buttonLabel = "Crea
     const stars_regex = /[1|2|3|4|5]/;
     // Stryker disable next-line Regex
     const isodate_regex = /(\d{4}-[01]\d-[0-3]\dT[0-2]\d:[0-5]\d:[0-5]\d\.\d+)|(\d{4}-[01]\d-[0-3]\dT[0-2]\d:[0-5]\d:[0-5]\d)|(\d{4}-[01]\d-[0-3]\dT[0-2]\d:[0-5]\d)/i;
+
     const testIdPrefix = "MenuItemReviewForm";
 
     return (
@@ -130,7 +131,7 @@ function MenuItemReviewForm({ initialContents, submitAction, buttonLabel = "Crea
                     type="text"
                     isInvalid={Boolean(errors.comments)}
                     {...register("comments", {
-                        required: "Comments is required.",
+                        required: "Comments are required.",
                     })}
                 />
                 <Form.Control.Feedback type="invalid">
