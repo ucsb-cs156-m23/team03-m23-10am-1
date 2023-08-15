@@ -70,20 +70,20 @@ describe("UCSBOrganizationTable tests", () => {
       expect(header).toBeInTheDocument();
     });
 
-    expect(screen.getByTestId(`${testId}-cell-row-0-col-orgCode`)).toHaveTextContent("KFC");
-    expect(screen.getByTestId(`${testId}-cell-row-0-col-orgTranslationShort`)).toHaveTextContent("Kentucky Fried Chi");
-    expect(screen.getByTestId(`${testId}-cell-row-0-col-orgTranslation`)).toHaveTextContent("Kentucky Fried Chicken");
-    expect(screen.getByTestId(`${testId}-cell-row-0-col-inactive`)).toHaveTextContent("false");
+    expect(screen.getByTestId(`${testId}-cell-row-0-col-OrgCode`)).toHaveTextContent("KFC");
+    expect(screen.getByTestId(`${testId}-cell-row-0-col-OrgTranslationShort`)).toHaveTextContent("Kentucky Fried Chi");
+    expect(screen.getByTestId(`${testId}-cell-row-0-col-OrgTranslation`)).toHaveTextContent("Kentucky Fried Chicken");
+    expect(screen.getByTestId(`${testId}-cell-row-0-col-Inactive`)).toHaveTextContent("false");
 
-    expect(screen.getByTestId(`${testId}-cell-row-1-col-orgCode`)).toHaveTextContent("ABC");
-    expect(screen.getByTestId(`${testId}-cell-row-1-col-orgTranslationShort`)).toHaveTextContent("Alpha Bang Cloud");
-    expect(screen.getByTestId(`${testId}-cell-row-1-col-orgTranslation`)).toHaveTextContent("Alpha Bang Cloud");
-    expect(screen.getByTestId(`${testId}-cell-row-1-col-inactive`)).toHaveTextContent("true");
+    expect(screen.getByTestId(`${testId}-cell-row-1-col-OrgCode`)).toHaveTextContent("ABC");
+    expect(screen.getByTestId(`${testId}-cell-row-1-col-OrgTranslationShort`)).toHaveTextContent("Alpha Bang Cloud");
+    expect(screen.getByTestId(`${testId}-cell-row-1-col-OrgTranslation`)).toHaveTextContent("Alpha Bang Cloud");
+    expect(screen.getByTestId(`${testId}-cell-row-1-col-Inactive`)).toHaveTextContent("true");
 
-    expect(screen.getByTestId(`${testId}-cell-row-2-col-orgCode`)).toHaveTextContent("IOSS");
-    expect(screen.getByTestId(`${testId}-cell-row-2-col-orgTranslationShort`)).toHaveTextContent("One Stop");
-    expect(screen.getByTestId(`${testId}-cell-row-2-col-orgTranslation`)).toHaveTextContent("Import One Stop Shop");
-    expect(screen.getByTestId(`${testId}-cell-row-2-col-inactive`)).toHaveTextContent("true");
+    expect(screen.getByTestId(`${testId}-cell-row-2-col-OrgCode`)).toHaveTextContent("IOSS");
+    expect(screen.getByTestId(`${testId}-cell-row-2-col-OrgTranslationShort`)).toHaveTextContent("One Stop");
+    expect(screen.getByTestId(`${testId}-cell-row-2-col-OrgTranslation`)).toHaveTextContent("Import One Stop Shop");
+    expect(screen.getByTestId(`${testId}-cell-row-2-col-Inactive`)).toHaveTextContent("true");
 
 
     const editButton = screen.getByTestId(`${testId}-cell-row-0-col-Edit-button`);
@@ -120,17 +120,17 @@ describe("UCSBOrganizationTable tests", () => {
       expect(header).toBeInTheDocument();
     });
 
-    expect(screen.getByTestId(`${testId}-cell-row-0-col-orgCode`)).toHaveTextContent("KFC");
-    expect(screen.getByTestId(`${testId}-cell-row-0-col-orgTranslationShort`)).toHaveTextContent("Kentucky Fried Chi");
-    expect(screen.getByTestId(`${testId}-cell-row-0-col-orgTranslation`)).toHaveTextContent("Kentucky Fried Chicken");
+    expect(screen.getByTestId(`${testId}-cell-row-0-col-OrgCode`)).toHaveTextContent("KFC");
+    expect(screen.getByTestId(`${testId}-cell-row-0-col-OrgTranslationShort`)).toHaveTextContent("Kentucky Fried Chi");
+    expect(screen.getByTestId(`${testId}-cell-row-0-col-OrgTranslation`)).toHaveTextContent("Kentucky Fried Chicken");
 
-    expect(screen.getByTestId(`${testId}-cell-row-1-col-orgCode`)).toHaveTextContent("ABC");
-    expect(screen.getByTestId(`${testId}-cell-row-1-col-orgTranslationShort`)).toHaveTextContent("Alpha Bang Cloud");
-    expect(screen.getByTestId(`${testId}-cell-row-1-col-orgTranslation`)).toHaveTextContent("Alpha Bang Cloud");
+    expect(screen.getByTestId(`${testId}-cell-row-1-col-OrgCode`)).toHaveTextContent("ABC");
+    expect(screen.getByTestId(`${testId}-cell-row-1-col-OrgTranslationShort`)).toHaveTextContent("Alpha Bang Cloud");
+    expect(screen.getByTestId(`${testId}-cell-row-1-col-OrgTranslation`)).toHaveTextContent("Alpha Bang Cloud");
 
-    expect(screen.getByTestId(`${testId}-cell-row-2-col-orgCode`)).toHaveTextContent("IOSS");
-    expect(screen.getByTestId(`${testId}-cell-row-2-col-orgTranslationShort`)).toHaveTextContent("One Stop");
-    expect(screen.getByTestId(`${testId}-cell-row-2-col-orgTranslation`)).toHaveTextContent("Import One Stop Shop");
+    expect(screen.getByTestId(`${testId}-cell-row-2-col-OrgCode`)).toHaveTextContent("IOSS");
+    expect(screen.getByTestId(`${testId}-cell-row-2-col-OrgTranslationShort`)).toHaveTextContent("One Stop");
+    expect(screen.getByTestId(`${testId}-cell-row-2-col-OrgTranslation`)).toHaveTextContent("Import One Stop Shop");
 
     expect(screen.queryByText("Delete")).not.toBeInTheDocument();
     expect(screen.queryByText("Edit")).not.toBeInTheDocument();
@@ -151,8 +151,8 @@ describe("UCSBOrganizationTable tests", () => {
     );
 
     // assert - check that the expected content is rendered
-    expect(await screen.findByTestId(`${testId}-cell-row-0-col-orgCode`)).toHaveTextContent("KFC");
-    expect(screen.getByTestId(`${testId}-cell-row-0-col-orgTranslationShort`)).toHaveTextContent("Kentucky Fried Chi");
+    expect(await screen.findByTestId(`${testId}-cell-row-0-col-OrgCode`)).toHaveTextContent("KFC");
+    expect(screen.getByTestId(`${testId}-cell-row-0-col-OrgTranslationShort`)).toHaveTextContent("Kentucky Fried Chi");
 
     const editButton = screen.getByTestId(`${testId}-cell-row-0-col-Edit-button`);
     expect(editButton).toBeInTheDocument();
@@ -179,8 +179,8 @@ describe("UCSBOrganizationTable tests", () => {
     );
 
     // assert - check that the expected content is rendered
-    expect(await screen.findByTestId(`${testId}-cell-row-0-col-orgCode`)).toHaveTextContent("KFC");
-    expect(screen.getByTestId(`${testId}-cell-row-0-col-orgTranslationShort`)).toHaveTextContent("Kentucky Fried Chi");
+    expect(await screen.findByTestId(`${testId}-cell-row-0-col-OrgCode`)).toHaveTextContent("KFC");
+    expect(screen.getByTestId(`${testId}-cell-row-0-col-OrgTranslationShort`)).toHaveTextContent("Kentucky Fried Chi");
 
     const deleteButton = screen.getByTestId(`${testId}-cell-row-0-col-Delete-button`);
     expect(deleteButton).toBeInTheDocument();
