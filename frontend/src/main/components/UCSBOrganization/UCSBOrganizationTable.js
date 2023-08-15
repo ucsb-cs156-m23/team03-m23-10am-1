@@ -2,7 +2,7 @@ import React from "react";
 import OurTable, { ButtonColumn } from "main/components/OurTable";
 
 import { useBackendMutation } from "main/utils/useBackend";
-import { cellToAxiosParamsDelete, onDeleteSuccess } from "main/utils/UCSBOrganizationUtils"
+import { cellToAxiosParamsDelete, onDeleteSuccess } from "main/utils/UCSBOrganizationsUtils"
 import { useNavigate } from "react-router-dom";
 import { hasRole } from "main/utils/currentUser";
 
@@ -31,21 +31,22 @@ export default function UCSBOrganizationTable({
 
     const columns = [
         {
-            Header: 'OrgCode',
-            accessor: 'OrgCode', // accessor is the "key" in the data
+            Header: 'orgCode',
+            accessor: 'orgCode', // accessor is the "key" in the data
         },
 
         {
-            Header: 'OrgTranslationShort',
-            accessor: 'OrgTranslationShort',
+            Header: 'orgTranslationShort',
+            accessor: 'orgTranslationShort',
         },
         {
-            Header: 'OrgTranslation',
-            accessor: 'OrgTranslation',
+            Header: 'orgTranslation',
+            accessor: 'orgTranslation',
         },
         {
+            id: 'inactive',
             Header: 'Inactive',
-            accessor: 'Inactive',
+            accessor: (row, _rowIndex) => String(row.inactive),
         }
     ];
 
