@@ -58,7 +58,7 @@ describe("UCSBOrganizationEditPage tests", () => {
                     </MemoryRouter>
                 </QueryClientProvider>
             );
-            await screen.findByText("Edit UCSBOrganization");
+            await screen.findByText("Edit Organization");
             expect(screen.queryByTestId("Organization-orgCode")).not.toBeInTheDocument();
             restoreConsole();
         });
