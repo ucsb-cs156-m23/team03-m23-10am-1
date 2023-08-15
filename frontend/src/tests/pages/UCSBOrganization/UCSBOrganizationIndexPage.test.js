@@ -56,16 +56,16 @@ describe("UCSBOrganizationIndexPage tests", () => {
         );
 
         await waitFor(() => {
-            expect(screen.getByText(/Create newOrganization/)).toBeInTheDocument();
+            expect(screen.getByText(/Create Organization/)).toBeInTheDocument();
         });
-        const button = screen.getByText(/Create newOrganization/);
+        const button = screen.getByText(/Create Organization/);
         expect(button).toHaveAttribute("href", "/ucsborganization/create");
         expect(button).toHaveAttribute("style", "float: right;");
     });
 
     test("renders three organizations correctly for regular user", async () => {
         setupUserOnly();
-        axiosMock.onGet("/api/ucsborganization/all").reply(200, ucsbOrganizationFixtures.threeOrganization);
+        axiosMock.onGet("/api/ucsborganization/all").reply(200, ucsbOrganizationFixtures.threeOrganizations);
 
         render(
             <QueryClientProvider client={queryClient}>
@@ -75,18 +75,21 @@ describe("UCSBOrganizationIndexPage tests", () => {
             </QueryClientProvider>
         );
 
-        await waitFor(() => { expect(screen.getByTestId(`${testId}-cell-row-0-col-orgCode`)).toHaveTextContent("KFC"); });
-        expect(screen.getByTestId(`${testId}-cell-row-1-col-orgCode`)).toHaveTextContent("ABC");
-        expect(screen.getByTestId(`${testId}-cell-row-2-col-orgCode`)).toHaveTextContent("IOSS");
+        await waitFor(() => { expect(screen.getByTestId(`${testId}-cell-row-0-col-orgCode`)).toHaveTextContent("KRC"); });
+        expect(screen.getByTestId(`${testId}-cell-row-1-col-orgCode`)).toHaveTextContent("OSLI");
+        expect(screen.getByTestId(`${testId}-cell-row-2-col-orgCode`)).toHaveTextContent("ZPR");
 
-        const createUCSBOrganizationButton = screen.queryByText("Create newOrganization");
-        expect(createUCSBOrganizationButton).not.toBeInTheDocument();
+        const createOrganizationtButton = screen.queryByText("Create Organization");
+        expect(createOrganizationtButton).not.toBeInTheDocument();
 
-        const name = screen.getByText("Kentucky Fried Chi");
-        expect(name).toBeInTheDocument();
+        const orgTranslationShort = screen.getByText("KOREAN RADIO CL");
+        expect(orgTranslationShort).toBeInTheDocument();
 
-        const description = screen.getByText("Kentucky Fried Chicken");
-        expect(description).toBeInTheDocument();
+        const orgTranslation = screen.getByText("KOREAN RADIO CLUB");
+        expect(orgTranslation).toBeInTheDocument();
+
+        const inactive = screen.getByText("Inactive");
+        expect(inactive).toBeInTheDocument();
 
         // for non-admin users, details button is visible, but the edit and delete buttons should not be visible
         expect(screen.queryByTestId("UCSBOrganizationTable-cell-row-0-col-Delete-button")).not.toBeInTheDocument();
@@ -119,8 +122,8 @@ describe("UCSBOrganizationIndexPage tests", () => {
     test("what happens when you click delete, admin", async () => {
         setupAdminUser();
 
-        axiosMock.onGet("/api/ucsborganization/all").reply(200, ucsbOrganizationFixtures.threeOrganization);
-        axiosMock.onDelete("/api/ucsborganization").reply(200, "Organization with orgCode 456 was deleted");
+        axiosMock.onGet("/api/ucsborganization/all").reply(200, ucsbOrganizationFixtures.threeOrganizations);
+        axiosMock.onDelete("/api/ucsborganization").reply(200, "Organization with orgCode KRC was deleted");
 
 
         render(
@@ -133,19 +136,19 @@ describe("UCSBOrganizationIndexPage tests", () => {
 
         await waitFor(() => { expect(screen.getByTestId(`${testId}-cell-row-0-col-orgCode`)).toBeInTheDocument(); });
 
-        expect(screen.getByTestId(`${testId}-cell-row-0-col-orgCode`)).toHaveTextContent("KFC");
-
+        expect(screen.getByTestId(`${testId}-cell-row-0-col-orgCode`)).toHaveTextContent("KRC");
 
         const deleteButton = screen.getByTestId(`${testId}-cell-row-0-col-Delete-button`);
         expect(deleteButton).toBeInTheDocument();
 
         fireEvent.click(deleteButton);
-        await waitFor(() => { expect(mockToast).toBeCalledWith("Organization with orgCode KFC was deleted") });
+
+        await waitFor(() => { expect(mockToast).toBeCalledWith("Organization with orgCode KRC was deleted") });
 
         await waitFor(() => { expect(axiosMock.history.delete.length).toBe(1); });
-        //expect(axiosMock.history.delete[0].url).toBe("/api/ucsborganization");
         expect(axiosMock.history.delete[0].url).toBe("/api/ucsborganization");
-        //expect(axiosMock.history.delete[0].params).toEqual({ orgCode: 2 });
+        expect(axiosMock.history.delete[0].url).toBe("/api/ucsborganization");
+        expect(axiosMock.history.delete[0].params).toEqual({ orgCode: "KRC" });
     });
 
 });

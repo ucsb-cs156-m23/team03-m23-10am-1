@@ -5,6 +5,7 @@ import { MemoryRouter } from "react-router-dom";
 
 import { apiCurrentUserFixtures } from "fixtures/currentUserFixtures";
 import { systemInfoFixtures } from "fixtures/systemInfoFixtures";
+
 import axios from "axios";
 import AxiosMockAdapter from "axios-mock-adapter";
 
@@ -29,17 +30,19 @@ jest.mock('react-router-dom', () => {
 });
 
 describe("UCSBOrganizationCreatePage tests", () => {
+
     const axiosMock = new AxiosMockAdapter(axios);
 
     beforeEach(() => {
+        jest.clearAllMocks();
         axiosMock.reset();
         axiosMock.resetHistory();
         axiosMock.onGet("/api/currentUser").reply(200, apiCurrentUserFixtures.userOnly);
         axiosMock.onGet("/api/systemInfo").reply(200, systemInfoFixtures.showingNeither);
     });
 
+    const queryClient = new QueryClient();
     test("renders without crashing", () => {
-        const queryClient = new QueryClient();
         render(
             <QueryClientProvider client={queryClient}>
                 <MemoryRouter>
@@ -49,14 +52,14 @@ describe("UCSBOrganizationCreatePage tests", () => {
         );
     });
 
-    test("when submit, makes request to backend and redirects to /ucsborganization", async () => {
+    test("on submit, makes request to backend, and redirects to /ucsborganization", async () => {
 
         const queryClient = new QueryClient();
         const organization = {
-            orgCode: "KFC",
-            orgTranslationShort: "Kentucky Fried Chi",
-            orgTranslation: "Kentucky Fried Chicken",
-            inactive:'false'
+            orgCode: "KRC",
+            orgTranslationShort: "KOREAN RADIO CL",
+            orgTranslation: "KOREAN RADIO CLUB",
+            inactive: "false"
         };
 
         axiosMock.onPost("/api/ucsborganization/post").reply(202, organization);
@@ -70,35 +73,41 @@ describe("UCSBOrganizationCreatePage tests", () => {
         )
 
         await waitFor(() => {
-            expect(screen.getByTestId("UCSBOrganizationForm-orgCode")).toBeInTheDocument();
+            expect(screen.getByLabelText("Organization Translation Short")).toBeInTheDocument();
         });
 
-        const orgCodeField = screen.getByTestId("UCSBOrganizationForm-orgCode");//getByLabelText("OrgCode");
-        const orgTranslationShortField = screen.getByTestId("UCSBOrganizationForm-orgTranslationShort");
-        const orgTranslationField = screen.getByTestId("UCSBOrganizationForm-orgTranslation");
-        const inactiveField = screen.getByTestId("UCSBOrganizationForm-inactive");
-        const createButton = screen.getByTestId("UCSBOrganizationForm-submit");
+        const orgCodeInput = screen.getByLabelText("Organization Code");
+
+        const otsInput = screen.getByLabelText("Organization Translation Short");
+        expect(otsInput).toBeInTheDocument();
+
+        const otInput = screen.getByLabelText("Organization Translation");
+        expect(otInput).toBeInTheDocument();
+
+        const inactiveInput = screen.getByLabelText("Inactive");
+        expect(inactiveInput).toBeInTheDocument();
+
+        const createButton = screen.getByText("Create");
         expect(createButton).toBeInTheDocument();
 
-        fireEvent.change(orgCodeField, { target: { value: 'KFC' } });
-        fireEvent.change(orgTranslationShortField, { target: { value: 'Kentucky Fried Chi' } });
-        fireEvent.change(orgTranslationField, { target: { value: 'Kentucky Fried Chicken' } });
-        fireEvent.change(inactiveField, { target: { value: 'false' } });
+        fireEvent.change(orgCodeInput, { target: { value: 'KRC' } })
+        fireEvent.change(otsInput, { target: { value: 'KOREAN RADIO CL' } })
+        fireEvent.change(otInput, { target: { value: 'KOREAN RADIO CLUB' } })
+        fireEvent.change(inactiveInput, { target: { value: 'false' } })
         fireEvent.click(createButton);
 
         await waitFor(() => expect(axiosMock.history.post.length).toBe(1));
-        console.log(axiosMock.history.post);
-        expect(axiosMock.history.post[0].params).toEqual(
-            {
-                "orgCode": "KFC",
-                "orgTranslationShort": "Kentucky Fried Chi",
-                "orgTranslation": "Kentucky Fried Chicken",
-                "inactive": "false" 
-            });
-        
-        expect(mockToast).toBeCalledWith("New organization Created - orgCode: KFC");
+
+        expect(axiosMock.history.post[0].params).toEqual({
+            orgCode: "KRC",
+            orgTranslationShort: "KOREAN RADIO CL",
+            orgTranslation: "KOREAN RADIO CLUB",
+            inactive: "false"
+        });
+
+        // assert - check that the toast was called with the expected message
+        expect(mockToast).toBeCalledWith("New UCSB Organization Created - orgCode: KRC");
         expect(mockNavigate).toBeCalledWith({ "to": "/ucsborganization" });
+
     });
-
 });
-

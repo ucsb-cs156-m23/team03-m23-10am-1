@@ -16,12 +16,12 @@ jest.mock('react-router-dom', () => ({
 describe("UCSBOrganizationTable tests", () => {
   const queryClient = new QueryClient();
 
-  const expectedHeaders = ["OrgCode", "OrgTranslationShort", "OrgTranslation", "Inactive"];
-  const expectedFields = ["OrgCode", "OrgTranslationShort", "OrgTranslation", "Inactive"];
+  const expectedHeaders = ["orgCode", "orgTranslationShort", "orgTranslation", "Inactive"];
+  const expectedFields = ["orgCode", "orgTranslationShort", "orgTranslation", "inactive"];
   const testId = "UCSBOrganizationTable";
 
   test("renders empty table correctly", () => {
-
+    
     // arrange
     const currentUser = currentUserFixtures.adminUser;
 
@@ -70,21 +70,20 @@ describe("UCSBOrganizationTable tests", () => {
       expect(header).toBeInTheDocument();
     });
 
-    expect(screen.getByTestId(`${testId}-cell-row-0-col-OrgCode`)).toHaveTextContent("KFC");
-    expect(screen.getByTestId(`${testId}-cell-row-0-col-OrgTranslationShort`)).toHaveTextContent("Kentucky Fried Chi");
-    expect(screen.getByTestId(`${testId}-cell-row-0-col-OrgTranslation`)).toHaveTextContent("Kentucky Fried Chicken");
-    expect(screen.getByTestId(`${testId}-cell-row-0-col-Inactive`)).toHaveTextContent("false");
+    expect(screen.getByTestId(`${testId}-cell-row-0-col-orgCode`)).toHaveTextContent("KRC");
+    expect(screen.getByTestId(`${testId}-cell-row-0-col-orgTranslationShort`)).toHaveTextContent("KOREAN RADIO CL");
+    expect(screen.getByTestId(`${testId}-cell-row-0-col-orgTranslation`)).toHaveTextContent("KOREAN RADIO CLUB");
+    expect(screen.getByTestId(`${testId}-cell-row-0-col-inactive`)).toHaveTextContent("false");
+    
+    expect(screen.getByTestId(`${testId}-cell-row-1-col-orgCode`)).toHaveTextContent("OSLI");
+    expect(screen.getByTestId(`${testId}-cell-row-1-col-orgTranslationShort`)).toHaveTextContent("STUDENT LIFE");
+    expect(screen.getByTestId(`${testId}-cell-row-1-col-orgTranslation`)).toHaveTextContent("OFFICE OF STUDENT LIFE");
+    expect(screen.getByTestId(`${testId}-cell-row-1-col-inactive`)).toHaveTextContent("false");
 
-    expect(screen.getByTestId(`${testId}-cell-row-1-col-OrgCode`)).toHaveTextContent("ABC");
-    expect(screen.getByTestId(`${testId}-cell-row-1-col-OrgTranslationShort`)).toHaveTextContent("Alpha Bang Cloud");
-    expect(screen.getByTestId(`${testId}-cell-row-1-col-OrgTranslation`)).toHaveTextContent("Alpha Bang Cloud");
-    expect(screen.getByTestId(`${testId}-cell-row-1-col-Inactive`)).toHaveTextContent("true");
-
-    expect(screen.getByTestId(`${testId}-cell-row-2-col-OrgCode`)).toHaveTextContent("IOSS");
-    expect(screen.getByTestId(`${testId}-cell-row-2-col-OrgTranslationShort`)).toHaveTextContent("One Stop");
-    expect(screen.getByTestId(`${testId}-cell-row-2-col-OrgTranslation`)).toHaveTextContent("Import One Stop Shop");
-    expect(screen.getByTestId(`${testId}-cell-row-2-col-Inactive`)).toHaveTextContent("true");
-
+    expect(screen.getByTestId(`${testId}-cell-row-2-col-orgCode`)).toHaveTextContent("ZPR");
+    expect(screen.getByTestId(`${testId}-cell-row-2-col-orgTranslationShort`)).toHaveTextContent("ZETA PHI RHO");
+    expect(screen.getByTestId(`${testId}-cell-row-2-col-orgTranslation`)).toHaveTextContent("ZETA PHI RHO");
+    expect(screen.getByTestId(`${testId}-cell-row-2-col-inactive`)).toHaveTextContent("true");
 
     const editButton = screen.getByTestId(`${testId}-cell-row-0-col-Edit-button`);
     expect(editButton).toBeInTheDocument();
@@ -119,18 +118,18 @@ describe("UCSBOrganizationTable tests", () => {
       const header = screen.getByTestId(`${testId}-cell-row-0-col-${field}`);
       expect(header).toBeInTheDocument();
     });
+    
+    expect(screen.getByTestId(`${testId}-cell-row-0-col-orgCode`)).toHaveTextContent("KRC");
+    expect(screen.getByTestId(`${testId}-cell-row-0-col-orgTranslationShort`)).toHaveTextContent("KOREAN RADIO CL");
+    expect(screen.getByTestId(`${testId}-cell-row-0-col-orgTranslation`)).toHaveTextContent("KOREAN RADIO CLUB");
 
-    expect(screen.getByTestId(`${testId}-cell-row-0-col-OrgCode`)).toHaveTextContent("KFC");
-    expect(screen.getByTestId(`${testId}-cell-row-0-col-OrgTranslationShort`)).toHaveTextContent("Kentucky Fried Chi");
-    expect(screen.getByTestId(`${testId}-cell-row-0-col-OrgTranslation`)).toHaveTextContent("Kentucky Fried Chicken");
+    expect(screen.getByTestId(`${testId}-cell-row-1-col-orgCode`)).toHaveTextContent("OSLI");
+    expect(screen.getByTestId(`${testId}-cell-row-1-col-orgTranslationShort`)).toHaveTextContent("STUDENT LIFE");
+    expect(screen.getByTestId(`${testId}-cell-row-1-col-orgTranslation`)).toHaveTextContent("OFFICE OF STUDENT LIFE");
 
-    expect(screen.getByTestId(`${testId}-cell-row-1-col-OrgCode`)).toHaveTextContent("ABC");
-    expect(screen.getByTestId(`${testId}-cell-row-1-col-OrgTranslationShort`)).toHaveTextContent("Alpha Bang Cloud");
-    expect(screen.getByTestId(`${testId}-cell-row-1-col-OrgTranslation`)).toHaveTextContent("Alpha Bang Cloud");
-
-    expect(screen.getByTestId(`${testId}-cell-row-2-col-OrgCode`)).toHaveTextContent("IOSS");
-    expect(screen.getByTestId(`${testId}-cell-row-2-col-OrgTranslationShort`)).toHaveTextContent("One Stop");
-    expect(screen.getByTestId(`${testId}-cell-row-2-col-OrgTranslation`)).toHaveTextContent("Import One Stop Shop");
+    expect(screen.getByTestId(`${testId}-cell-row-2-col-orgCode`)).toHaveTextContent("ZPR");
+    expect(screen.getByTestId(`${testId}-cell-row-2-col-orgTranslationShort`)).toHaveTextContent("ZETA PHI RHO");
+    expect(screen.getByTestId(`${testId}-cell-row-2-col-orgTranslation`)).toHaveTextContent("ZETA PHI RHO");
 
     expect(screen.queryByText("Delete")).not.toBeInTheDocument();
     expect(screen.queryByText("Edit")).not.toBeInTheDocument();
@@ -151,8 +150,8 @@ describe("UCSBOrganizationTable tests", () => {
     );
 
     // assert - check that the expected content is rendered
-    expect(await screen.findByTestId(`${testId}-cell-row-0-col-OrgCode`)).toHaveTextContent("KFC");
-    expect(screen.getByTestId(`${testId}-cell-row-0-col-OrgTranslationShort`)).toHaveTextContent("Kentucky Fried Chi");
+    expect(await screen.findByTestId(`${testId}-cell-row-0-col-orgCode`)).toHaveTextContent("KRC");
+    expect(screen.getByTestId(`${testId}-cell-row-0-col-orgTranslationShort`)).toHaveTextContent("KOREAN RADIO CL");
 
     const editButton = screen.getByTestId(`${testId}-cell-row-0-col-Edit-button`);
     expect(editButton).toBeInTheDocument();
@@ -161,7 +160,7 @@ describe("UCSBOrganizationTable tests", () => {
     fireEvent.click(editButton);
 
     // assert - check that the navigate function was called with the expected path
-    await waitFor(() => expect(mockedNavigate).toHaveBeenCalledWith('/ucsborganization/edit/KFC'));
+    await waitFor(() => expect(mockedNavigate).toHaveBeenCalledWith('/ucsborganization/edit/KRC'));
 
   });
 
@@ -179,8 +178,8 @@ describe("UCSBOrganizationTable tests", () => {
     );
 
     // assert - check that the expected content is rendered
-    expect(await screen.findByTestId(`${testId}-cell-row-0-col-OrgCode`)).toHaveTextContent("KFC");
-    expect(screen.getByTestId(`${testId}-cell-row-0-col-OrgTranslationShort`)).toHaveTextContent("Kentucky Fried Chi");
+    expect(await screen.findByTestId(`${testId}-cell-row-0-col-orgCode`)).toHaveTextContent("KRC");
+    expect(screen.getByTestId(`${testId}-cell-row-0-col-orgTranslationShort`)).toHaveTextContent("KOREAN RADIO CL");
 
     const deleteButton = screen.getByTestId(`${testId}-cell-row-0-col-Delete-button`);
     expect(deleteButton).toBeInTheDocument();
