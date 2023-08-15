@@ -23,10 +23,10 @@ describe("UCSBOrganizationUtils", () => {
             onDeleteSuccess("abc");
 
             // assert
-            expect(mockToast).toHaveBeenCalledWith("KFC");
+            expect(mockToast).toHaveBeenCalledWith("abc");
             expect(console.log).toHaveBeenCalled();
             const message = console.log.mock.calls[0][0];
-            expect(message).toMatch("KFC");
+            expect(message).toMatch("abc");
 
             restoreConsole();
         });
@@ -36,7 +36,7 @@ describe("UCSBOrganizationUtils", () => {
 
         test("It returns the correct params", () => {
             // arrange
-            const cell = { row: { values: { orgcode: "17" } } };
+            const cell = { row: { values: { orgCode: "KRC" } } };
 
             // act
             const result = cellToAxiosParamsDelete(cell);
@@ -45,13 +45,9 @@ describe("UCSBOrganizationUtils", () => {
             expect(result).toEqual({
                 url: "/api/ucsborganization",
                 method: "DELETE",
-                params: { orgcode: "17" }
+                params: { orgCode: "KRC" }
             });
         });
 
     });
 });
-
-
-
-
