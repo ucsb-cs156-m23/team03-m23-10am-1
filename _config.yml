@@ -23,4 +23,4 @@ repo_name: "TBD"
 repo: ucsb-cs156-m23/team03-m23-10am-1
 owner: ucsb-cs156-m23
 repo_name: team03-m23-10am-1
-pull_requests: [{"author":{"id":"MDQ6VXNlcjYzOTk0NTY2","is_bot":false,"login":"EthanSun210","name":""},"headRefName":"Ethan-menuItemReviewTable","number":65,"title":"es - Add menuItemReviewTable related files","url":"https://github.com/ucsb-cs156-m23/team03-m23-10am-1/pull/65"},{"author":{"id":"MDQ6VXNlcjYzOTk0NTY2","is_bot":false,"login":"EthanSun210","name":""},"headRefName":"Ethan-menuItemReviewForm","number":64,"title":"es - Add MenuItemReviewForm related files","url":"https://github.com/ucsb-cs156-m23/team03-m23-10am-1/pull/64"}]
+pull_requests: [{"author":{"id":"MDQ6VXNlcjYzOTk0NTY2","is_bot":false,"login":"EthanSun210","name":""},"headRefName":"Ethan-menuItemReviewTable","number":65,"title":"es - Add menuItemReviewTable related files","url":"https://github.com/ucsb-cs156-m23/team03-m23-10am-1/pull/65"}]
