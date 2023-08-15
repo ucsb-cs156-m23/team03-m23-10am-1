@@ -8,7 +8,7 @@ import { toast } from "react-toastify";
 export default function UCSBOrganizationEditPage({storybook=false}) {
     let { orgCode } = useParams();
 
-    const { data: organization, _error, _status } =
+    const { data: ucsborganization, _error, _status } =
         useBackend(
             // Stryker disable next-line all : don't test internal caching of React Query
             [`/api/ucsborganization?orgCode=${orgCode}`],
@@ -16,26 +16,27 @@ export default function UCSBOrganizationEditPage({storybook=false}) {
                 method: "GET",
                 url: `/api/ucsborganization`,
                 params: {
-                    orgCode
+                  orgCode
                 }
             }
         );
 
-    const objectToAxiosPutParams = (organization) => ({
+    const objectToAxiosPutParams = (ucsborganization) => ({
         url: "/api/ucsborganization",
         method: "PUT",
         params: {
-            orgCode: organization.orgCode,
+            orgCode: ucsborganization.orgCode
         },
         data: {
-            orgTranslationShort: organization.orgTranslationShort,
-            orgTranslation: organization.orgTranslation,
-            inactive: organization.inactive,
+            orgCode: ucsborganization.orgCode,
+            orgTranslationShort: ucsborganization.orgTranslationShort,
+            orgTranslation: ucsborganization.orgTranslation,
+            inactive: ucsborganization.inactive,
         }
     });
 
-    const onSuccess = (organization) => {
-        toast(`UCSBOrganization Updated - orgCode: ${organization.orgCode}`);
+    const onSuccess = (ucsborganization) => {
+        toast(`UCSB Organization Updated - orgCode: ${ucsborganization.orgCode}`);
     }
 
     const mutation = useBackendMutation(
@@ -58,9 +59,9 @@ export default function UCSBOrganizationEditPage({storybook=false}) {
     return (
         <BasicLayout>
             <div className="pt-2">
-                <h1>Edit UCSBOrganization</h1>
+                <h1>Edit Organization</h1>
                 {
-                    organization && <UCSBOrganizationForm submitAction={onSubmit} buttonLabel={"Update"} initialContents={organization} />
+                    ucsborganization && <UCSBOrganizationForm submitAction={onSubmit} buttonLabel={"Update"} initialContents={ucsborganization} />
                 }
             </div>
         </BasicLayout>
