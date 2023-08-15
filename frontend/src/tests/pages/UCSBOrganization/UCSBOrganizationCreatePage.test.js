@@ -56,9 +56,9 @@ describe("UCSBOrganizationCreatePage tests", () => {
 
         const queryClient = new QueryClient();
         const organization = {
-            orgCode: "KRC",
-            orgTranslationShort: "KOREAN RADIO CL",
-            orgTranslation: "KOREAN RADIO CLUB",
+            orgCode: "KFC",
+            orgTranslationShort: "KF NOC",
+            orgTranslation: "RKFC",
             inactive: "false"
         };
 
@@ -90,23 +90,23 @@ describe("UCSBOrganizationCreatePage tests", () => {
         const createButton = screen.getByText("Create");
         expect(createButton).toBeInTheDocument();
 
-        fireEvent.change(orgCodeInput, { target: { value: 'KRC' } })
-        fireEvent.change(otsInput, { target: { value: 'KOREAN RADIO CL' } })
-        fireEvent.change(otInput, { target: { value: 'KOREAN RADIO CLUB' } })
+        fireEvent.change(orgCodeInput, { target: { value: 'KFC' } })
+        fireEvent.change(otsInput, { target: { value: 'KF NOC' } })
+        fireEvent.change(otInput, { target: { value: 'RKFC' } })
         fireEvent.change(inactiveInput, { target: { value: 'false' } })
         fireEvent.click(createButton);
 
         await waitFor(() => expect(axiosMock.history.post.length).toBe(1));
 
         expect(axiosMock.history.post[0].params).toEqual({
-            orgCode: "KRC",
-            orgTranslationShort: "KOREAN RADIO CL",
-            orgTranslation: "KOREAN RADIO CLUB",
+            orgCode: "KFC",
+            orgTranslationShort: "KF NOC",
+            orgTranslation: "RKFC",
             inactive: "false"
         });
 
         // assert - check that the toast was called with the expected message
-        expect(mockToast).toBeCalledWith("New UCSB Organization Created - orgCode: KRC");
+        expect(mockToast).toBeCalledWith("New UCSB Organization Created - orgCode: KFC");
         expect(mockNavigate).toBeCalledWith({ "to": "/ucsborganization" });
 
     });

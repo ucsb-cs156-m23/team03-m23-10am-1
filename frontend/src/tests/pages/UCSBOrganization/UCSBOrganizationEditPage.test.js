@@ -26,7 +26,7 @@ jest.mock('react-router-dom', () => {
         __esModule: true,
         ...originalModule,
         useParams: () => ({
-            orgCode: "KRC"
+            orgCode: "KFC"
         }),
         Navigate: (x) => { mockNavigate(x); return null; }
     };
@@ -43,7 +43,7 @@ describe("UCSBOrganizationEditPage tests", () => {
             axiosMock.resetHistory();
             axiosMock.onGet("/api/currentUser").reply(200, apiCurrentUserFixtures.userOnly);
             axiosMock.onGet("/api/systemInfo").reply(200, systemInfoFixtures.showingNeither);
-            axiosMock.onGet("/api/ucsborganization", { params: { orgCode: "KRC" } }).timeout();
+            axiosMock.onGet("/api/ucsborganization", { params: { orgCode: "KFC" } }).timeout();
         });
 
         const queryClient = new QueryClient();
@@ -73,16 +73,16 @@ describe("UCSBOrganizationEditPage tests", () => {
             axiosMock.resetHistory();
             axiosMock.onGet("/api/currentUser").reply(200, apiCurrentUserFixtures.userOnly);
             axiosMock.onGet("/api/systemInfo").reply(200, systemInfoFixtures.showingNeither);
-            axiosMock.onGet("/api/ucsborganization", { params: { orgCode: "KRC" } }).reply(200, {
-                orgCode: "KRC",
-                orgTranslationShort: "KOREAN RADIO CL",
-                orgTranslation: "KOREAN RADIO CLUB",
+            axiosMock.onGet("/api/ucsborganization", { params: { orgCode: "KFC" } }).reply(200, {
+                orgCode: "KFC",
+                orgTranslationShort: "KF NOC",
+                orgTranslation: "RKFC",
                 inactive: "false"
             });
             axiosMock.onPut('/api/ucsborganization').reply(200, {
-                orgCode: "KRC",
-                orgTranslationShort: "KOREAN RADIO",
-                orgTranslation: "Korean Radio Club",
+                orgCode: "KFC",
+                orgTranslationShort: "KFCS",
+                orgTranslation: "KFCT",
                 inactive: "true"
                 
             });
@@ -109,32 +109,32 @@ describe("UCSBOrganizationEditPage tests", () => {
             const submitButton = screen.getByTestId("UCSBOrganizationForm-submit");
 
             expect(orgCodeField).toBeInTheDocument();
-            expect(orgCodeField).toHaveValue("KRC");
+            expect(orgCodeField).toHaveValue("KFC");
             expect(otsField).toBeInTheDocument();
-            expect(otsField).toHaveValue("KOREAN RADIO CL");
+            expect(otsField).toHaveValue("KF NOC");
             expect(otField).toBeInTheDocument();
-            expect(otField).toHaveValue("KOREAN RADIO CLUB");
+            expect(otField).toHaveValue("RKFC");
             expect(inactiveField).toBeInTheDocument();
             expect(inactiveField).toHaveValue("false");
 
             expect(submitButton).toHaveTextContent("Update");
 
-            fireEvent.change(otsField, { target: { value: 'KOREAN RADIO' } });
-            fireEvent.change(otField, { target: { value: 'Korean Radio Club' } });
+            fireEvent.change(otsField, { target: { value: 'KFCS' } });
+            fireEvent.change(otField, { target: { value: 'KFCT' } });
             fireEvent.change(inactiveField, { target: { value: 'true' } });
             fireEvent.click(submitButton);
 
             await waitFor(() => expect(mockToast).toBeCalled());
-            expect(mockToast).toBeCalledWith("UCSB Organization Updated - orgCode: KRC");
+            expect(mockToast).toBeCalledWith("UCSB Organization Updated - orgCode: KFC");
             
             expect(mockNavigate).toBeCalledWith({ "to": "/ucsborganization" });
 
             expect(axiosMock.history.put.length).toBe(1); // times called
-            expect(axiosMock.history.put[0].params).toEqual({ orgCode: "KRC" });
+            expect(axiosMock.history.put[0].params).toEqual({ orgCode: "KFC" });
             expect(axiosMock.history.put[0].data).toBe(JSON.stringify({
-                orgCode: 'KRC',
-                orgTranslationShort: 'KOREAN RADIO',
-                orgTranslation: 'Korean Radio Club',
+                orgCode: 'KFC',
+                orgTranslationShort: 'KFCS',
+                orgTranslation: 'KFCT',
                 inactive: "true"
             })); // posted object
 
@@ -160,21 +160,21 @@ describe("UCSBOrganizationEditPage tests", () => {
             const inactiveField = screen.getByTestId("UCSBOrganizationForm-inactive");
             const submitButton = screen.getByTestId("UCSBOrganizationForm-submit");
 
-            expect(orgCodeField).toHaveValue("KRC");
-            expect(otsField).toHaveValue("KOREAN RADIO CL");
-            expect(otField).toHaveValue("KOREAN RADIO CLUB");
+            expect(orgCodeField).toHaveValue("KFC");
+            expect(otsField).toHaveValue("KF NOC");
+            expect(otField).toHaveValue("RKFC");
             expect(inactiveField).toHaveValue("false");
             expect(submitButton).toBeInTheDocument();
 
             fireEvent.change(orgCodeField, { target: { value: 'Freebirds World Burrito' } })
-            fireEvent.change(otsField, { target: { value: 'KOREAN RADIO' } })
-            fireEvent.change(otField, { target: { value: 'Korean Radio Club' } })
+            fireEvent.change(otsField, { target: { value: 'KFCS' } })
+            fireEvent.change(otField, { target: { value: 'KFCT' } })
             fireEvent.change(inactiveField, { target: { value: 'true' } })
 
             fireEvent.click(submitButton);
 
             await waitFor(() => expect(mockToast).toBeCalled());
-            expect(mockToast).toBeCalledWith("UCSB Organization Updated - orgCode: KRC");
+            expect(mockToast).toBeCalledWith("UCSB Organization Updated - orgCode: KFC");
             expect(mockNavigate).toBeCalledWith({ "to": "/ucsborganization" });
         });
 

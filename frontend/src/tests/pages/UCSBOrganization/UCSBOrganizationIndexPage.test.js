@@ -75,17 +75,17 @@ describe("UCSBOrganizationIndexPage tests", () => {
             </QueryClientProvider>
         );
 
-        await waitFor(() => { expect(screen.getByTestId(`${testId}-cell-row-0-col-orgCode`)).toHaveTextContent("KRC"); });
-        expect(screen.getByTestId(`${testId}-cell-row-1-col-orgCode`)).toHaveTextContent("OSLI");
-        expect(screen.getByTestId(`${testId}-cell-row-2-col-orgCode`)).toHaveTextContent("ZPR");
+        await waitFor(() => { expect(screen.getByTestId(`${testId}-cell-row-0-col-orgCode`)).toHaveTextContent("KFC"); });
+        expect(screen.getByTestId(`${testId}-cell-row-1-col-orgCode`)).toHaveTextContent("IOSS");
+        expect(screen.getByTestId(`${testId}-cell-row-2-col-orgCode`)).toHaveTextContent("ASD");
 
         const createOrganizationtButton = screen.queryByText("Create Organization");
         expect(createOrganizationtButton).not.toBeInTheDocument();
 
-        const orgTranslationShort = screen.getByText("KOREAN RADIO CL");
+        const orgTranslationShort = screen.getByText("KF NOC");
         expect(orgTranslationShort).toBeInTheDocument();
 
-        const orgTranslation = screen.getByText("KOREAN RADIO CLUB");
+        const orgTranslation = screen.getByText("RKFC");
         expect(orgTranslation).toBeInTheDocument();
 
         const inactive = screen.getByText("Inactive");
@@ -123,7 +123,7 @@ describe("UCSBOrganizationIndexPage tests", () => {
         setupAdminUser();
 
         axiosMock.onGet("/api/ucsborganization/all").reply(200, ucsbOrganizationFixtures.threeOrganizations);
-        axiosMock.onDelete("/api/ucsborganization").reply(200, "Organization with orgCode KRC was deleted");
+        axiosMock.onDelete("/api/ucsborganization").reply(200, "Organization with orgCode KFC was deleted");
 
 
         render(
@@ -136,19 +136,19 @@ describe("UCSBOrganizationIndexPage tests", () => {
 
         await waitFor(() => { expect(screen.getByTestId(`${testId}-cell-row-0-col-orgCode`)).toBeInTheDocument(); });
 
-        expect(screen.getByTestId(`${testId}-cell-row-0-col-orgCode`)).toHaveTextContent("KRC");
+        expect(screen.getByTestId(`${testId}-cell-row-0-col-orgCode`)).toHaveTextContent("KFC");
 
         const deleteButton = screen.getByTestId(`${testId}-cell-row-0-col-Delete-button`);
         expect(deleteButton).toBeInTheDocument();
 
         fireEvent.click(deleteButton);
 
-        await waitFor(() => { expect(mockToast).toBeCalledWith("Organization with orgCode KRC was deleted") });
+        await waitFor(() => { expect(mockToast).toBeCalledWith("Organization with orgCode KFC was deleted") });
 
         await waitFor(() => { expect(axiosMock.history.delete.length).toBe(1); });
         expect(axiosMock.history.delete[0].url).toBe("/api/ucsborganization");
         expect(axiosMock.history.delete[0].url).toBe("/api/ucsborganization");
-        expect(axiosMock.history.delete[0].params).toEqual({ orgCode: "KRC" });
+        expect(axiosMock.history.delete[0].params).toEqual({ orgCode: "KFC" });
     });
 
 });
