@@ -4,7 +4,7 @@ import { systemInfoFixtures } from "fixtures/systemInfoFixtures";
 import { ucsbOrganizationFixtures } from "fixtures/ucsbOrganizationFixtures";
 import { rest } from "msw";
 
-import UCSBOrganizationIndexPage from "main/pages/UCSBOrganization/UCSBOrganizationIndexPage";
+import UCSBOrganizationIndexPage from "main/pages/UCSBOrganizations/UCSBOrganizationIndexPage";
 
 export default {
     title: 'pages/UCSBOrganization/UCSBOrganizationIndexPage',
