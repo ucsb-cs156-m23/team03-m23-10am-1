@@ -22,7 +22,7 @@ Empty.parameters = {
         rest.get('/api/systemInfo', (_req, res, ctx) => {
             return res(ctx.json(systemInfoFixtures.showingNeither));
         }),
-        rest.get('/api/UCSBOrganization/all', (_req, res, ctx) => {
+        rest.get('/api/ucsborganization/all', (_req, res, ctx) => {
             return res(ctx.json([]));
         }),
     ]
@@ -54,10 +54,10 @@ ThreeItemsAdminUser.parameters = {
         rest.get('/api/systemInfo', (_req, res, ctx) => {
             return res(ctx.json(systemInfoFixtures.showingNeither));
         }),
-        rest.get('/api/ucsborganization/all', (_req, res, ctx) => {
+        rest.get('/api/restaurants/all', (_req, res, ctx) => {
             return res(ctx.json(ucsbOrganizationFixtures.threeOrganizations));
         }),
-        rest.delete('/api/ucsborganization', (req, res, ctx) => {
+        rest.delete('/api/restaurants', (req, res, ctx) => {
             window.alert("DELETE: " + JSON.stringify(req.url));
             return res(ctx.status(200),ctx.json({}));
         }),

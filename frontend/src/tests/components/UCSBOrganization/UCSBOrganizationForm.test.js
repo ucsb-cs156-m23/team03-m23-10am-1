@@ -29,11 +29,7 @@ describe("UCSBOrganizationForm tests", () => {
         );
 
         expect(await screen.findByText(/Create/)).toBeInTheDocument();
-        expect(await screen.findByTestId(`${testId}-organizationTranslationShort`)).toBeInTheDocument();
-        expect(await screen.findByTestId(`${testId}-organizationTranslation`)).toBeInTheDocument();
-        expect(await screen.findByTestId(`${testId}-inactive`)).toBeInTheDocument();
-        expect(await screen.findByTestId(`${testId}-submit`)).toBeInTheDocument();
-        
+
         expectedHeaders.forEach((headerText) => {
             const header = screen.getByText(headerText);
             expect(header).toBeInTheDocument();
@@ -87,13 +83,41 @@ describe("UCSBOrganizationForm tests", () => {
             </QueryClientProvider>
         );
 
+        
+        expect(await screen.findByTestId(`${testId}-orgCode`)).toBeInTheDocument();
+
+        expect(await screen.findByTestId(`${testId}-orgTranslation`)).toBeInTheDocument();
+        expect(screen.getByText(`Organization Translation`)).toBeInTheDocument();
+        
+        expect(await screen.findByTestId(`${testId}-inactive`)).toBeInTheDocument();
+        expect(screen.getByText(`Inactive`)).toBeInTheDocument();
+
+        expect(await screen.findByTestId(`${testId}-submit`)).toBeInTheDocument();
+
         expect(await screen.findByText(/Create/)).toBeInTheDocument();
         const submitButton = screen.getByText(/Create/);
         fireEvent.click(submitButton);
 
-        await screen.findByText(/OrganizationTranslationShort is required/);
-        expect(screen.getByText(/OrganizationTranslation is required/)).toBeInTheDocument();
-        expect(screen.getByText(/Inactive is required/)).toBeInTheDocument();
+        await screen.findByText(/orgTranslationShort is required./);
+        expect(screen.getByText(/orgTranslation is required./)).toBeInTheDocument();
+        expect(screen.getByText(/Inactive is required./)).toBeInTheDocument();
+
+        const orgTranslationShortInput = screen.getByTestId(`${testId}-orgTranslationShort`);
+        fireEvent.change(orgTranslationShortInput, { target: { value: "a".repeat(51) } });
+        fireEvent.click(submitButton);
+
+        await waitFor(() => {
+            expect(screen.getByText(/orgTranslationShort max length 50 characters./)).toBeInTheDocument();
+        });
+
+        /*
+        const orgCodeInput = screen.getByLabelText(`Organization Code`);
+        fireEvent.change(orgCodeInput, { target: { value: "a".repeat(31) } });
+
+        await waitFor(() => {
+            expect(screen.getByText(/orgCode max length 30 characters./)).toBeInTheDocument();
+        });
+        */
     });
 
 });

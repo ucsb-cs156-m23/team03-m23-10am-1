@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 
 function UCSBOrganizationForm({ initialContents, submitAction, buttonLabel = "Create" }) {
 
-
+    
     // Stryker disable all
     const {
         register,
@@ -14,7 +14,7 @@ function UCSBOrganizationForm({ initialContents, submitAction, buttonLabel = "Cr
         { defaultValues: initialContents || {}, }
     );
     // Stryker restore all
-
+   
     const navigate = useNavigate();
 
     const testIdPrefix = "UCSBOrganizationForm";
@@ -22,7 +22,7 @@ function UCSBOrganizationForm({ initialContents, submitAction, buttonLabel = "Cr
     return (
         <Form onSubmit={handleSubmit(submitAction)}>
 
-            {initialContents && (
+            {
                 <Form.Group className="mb-3" >
                     <Form.Label htmlFor="orgCode">Organization Code</Form.Label>
                     <Form.Control
@@ -30,11 +30,9 @@ function UCSBOrganizationForm({ initialContents, submitAction, buttonLabel = "Cr
                         id="orgCode"
                         type="text"
                         {...register("orgCode")}
-                        value={initialContents.id}
-                        disabled
                     />
                 </Form.Group>
-            )}
+            }
 
             <Form.Group className="mb-3" >
                 <Form.Label htmlFor="orgTranslationShort">Organization Translation Short</Form.Label>
@@ -44,10 +42,10 @@ function UCSBOrganizationForm({ initialContents, submitAction, buttonLabel = "Cr
                     type="text"
                     isInvalid={Boolean(errors.orgTranslationShort)}
                     {...register("orgTranslationShort", {
-                        required: "OrgTranslationShort is required.",
+                        required: "orgTranslationShort is required.",
                         maxLength : {
-                            value: 30,
-                            message: "Max length 30 characters"
+                            value: 50,
+                            message: "orgTranslationShort max length 50 characters."
                         }
                     })}
                 />
@@ -64,7 +62,7 @@ function UCSBOrganizationForm({ initialContents, submitAction, buttonLabel = "Cr
                     type="text"
                     isInvalid={Boolean(errors.orgTranslation)}
                     {...register("orgTranslation", {
-                        required: "OrgTranslation is required."
+                        required: "orgTranslation is required."
                     })}
                 />
                 <Form.Control.Feedback type="invalid">

@@ -10,7 +10,7 @@ export default function UCSBOrganizationIndexPage() {
 
     const currentUser = useCurrentUser();
 
-    const { data: organization, error: _error, status: _status } =
+    const { data: ucsboraganization, error: _error, status: _status } =
         useBackend(
             // Stryker disable next-line all : don't test internal caching of React Query
             ["/api/ucsborganization/all"],
@@ -27,7 +27,7 @@ export default function UCSBOrganizationIndexPage() {
                     href="/ucsborganization/create"
                     style={{ float: "right" }}
                 >
-                    Create newOrganization
+                    Create Organization
                 </Button>
             )
         } 
@@ -37,8 +37,8 @@ export default function UCSBOrganizationIndexPage() {
         <BasicLayout>
             <div className="pt-2">
                 {createButton()}
-                <h1>UCSB Organization</h1>
-                <UCSBOrganizationTable UCSBOrganizations={organization} currentUser={currentUser} /> 
+                <h1>Organization</h1>
+                <UCSBOrganizationTable ucsborganization={ucsboraganization} currentUser={currentUser} />
             </div>
         </BasicLayout>
     );
