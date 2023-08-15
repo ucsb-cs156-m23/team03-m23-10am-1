@@ -1,39 +1,42 @@
 const menuItemReviewFixtures = {
-    oneMenuItemReview: {
-        "id": 1,
-        "itemId": 1,
-        "reviewerEmail": "cgaucho@ucsb.edu",
-        "stars": 5,
-        "dateReviewed": "2022-01-02T12:00:00",
-        "comments": "Good"
-    },
+    oneMenuItemReview: [
+        {
+            "id": 1,
+            "itemId": 1,
+            "reviewerEmail": "test@ucsb.edu",
+            "stars": 5,
+            "dateReviewed": "2023-01-01T00:00:00.000Z",
+            "comments": "Test"
+        }
+    ],
+
     threeMenuItemReviews: [
         {
             "id": 1,
             "itemId": 1,
-            "reviewerEmail": "cgaucho1@ucsb.edu",
-            "stars": 3,
-            "dateReviewed": "2022-01-02T12:00:00",
-            "comments": "Not bad"
+            "reviewerEmail": "a@ucsb.edu",
+            "stars": 1,
+            "dateReviewed": "2023-01-01T00:00:00.000Z",
+            "comments": "First"
         },
         {
             "id": 2,
+
             "itemId": 2,
-            "reviewerEmail": "cgaucho2@ucsb.edu",
-            "stars": 4,
-            "dateReviewed": "2022-01-02T12:00:00",
-            "comments": "Good"
+            "reviewerEmail": "b@ucsb.edu",
+            "stars": 2,
+            "dateReviewed": "2023-01-02T00:00:00.000Z",
+            "comments": "Second"
         },
         {
             "id": 3,
             "itemId": 3,
-            "reviewerEmail": "cgaucho3@ucsb.edu",
-            "stars": 5,
-            "dateReviewed": "2022-01-02T12:00:00",
-            "comments": "Excellent"
-        },
+            "reviewerEmail": "c@ucsb.edu",
+            "stars": 3,
+            "dateReviewed": "2023-01-03T00:00:00.000Z",
+            "comments": "Third"
+        }
     ]
 };
-
 
 export { menuItemReviewFixtures };
