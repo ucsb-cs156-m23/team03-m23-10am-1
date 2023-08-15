@@ -63,11 +63,7 @@ function RecommendationRequestForm({ initialContents, submitAction, buttonLabel 
                     type="text"
                     isInvalid={Boolean(errors.professorEmail)}
                     {...register("professorEmail", {
-                        required: "ProfessorEmail is required.",
-                        maxLength : {
-                            value: 50,
-                            message: "Max length 50 characters"
-                        }
+                        required: "ProfessorEmail is required."
                     })}
                 />
                 <Form.Control.Feedback type="invalid">

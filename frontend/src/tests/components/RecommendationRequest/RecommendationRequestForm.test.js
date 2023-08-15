@@ -107,13 +107,6 @@ describe("RecommendationRequestForm tests", () => {
             expect(screen.getByText(/Max length 50 characters/)).toBeInTheDocument();
         });
 
-        fireEvent.change(screen.getByTestId(`${testId}-professorEmail`), { target: { value: "a".repeat(51) } });
-        fireEvent.click(submitButton);
-
-        await waitFor(() => {
-            expect(screen.getByText(/Max length 50 characters/)).toBeInTheDocument();
-        });
-
         fireEvent.change(screen.getByTestId(`${testId}-explanation`), { target: { value: "a".repeat(3001) } });
         fireEvent.click(submitButton);
 
