@@ -1,27 +1,27 @@
 const ucsbOrganizationFixtures = {
     oneOrganization: {
-        "orgCode": "KFC",
-        "orgTranslationShort": "Kentucky Fried Chi",
-        "orgTranslation": "Kentucky Fried Chicken",
-        "inactive": false
+        "orgCode": "KRC",
+        "orgTranslationShort": "KOREAN RADIO CL",
+        "orgTranslation": "KOREAN RADIO CLUB",
+        "inactive": "false"
     },
     threeOrganizations: [
         {
-            "orgCode": "KFC",
-            "orgTranslationShort": "Kentucky Fried Chi",
-            "orgTranslation": "Kentucky Fried Chicken",
+            "orgCode": "KRC",
+            "orgTranslationShort": "KOREAN RADIO CL",
+            "orgTranslation": "KOREAN RADIO CLUB",
             "inactive": "false"
         },
         {
-            "orgCode": "ABC",
-            "orgTranslationShort": "Alpha Bang Cloud",
-            "orgTranslation": "Alpha Bang Cloud",
-            "inactive": "true"
+            "orgCode": "OSLI",
+            "orgTranslationShort": "STUDENT LIFE",
+            "orgTranslation": "OFFICE OF STUDENT LIFE",
+            "inactive": "false"
         },
         {
-            "orgCode": "IOSS",
-            "orgTranslationShort": "One Stop",
-            "orgTranslation": "Import One Stop Shop",
+            "orgCode": "ZPR",
+            "orgTranslationShort": "ZETA PHI RHO",
+            "orgTranslation": "ZETA PHI RHO",
             "inactive": "true"
         }
     ]
