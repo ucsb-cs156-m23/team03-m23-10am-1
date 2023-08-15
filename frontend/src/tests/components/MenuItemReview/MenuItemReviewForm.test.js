@@ -52,7 +52,7 @@ describe("MenuItemReviewForm tests", () => {
         expect(screen.getByText(/Reviewer Email is required./)).toBeInTheDocument();
         expect(screen.getByText(/Stars is required./)).toBeInTheDocument();
         expect(screen.getByText(/Date Reviewed is required./)).toBeInTheDocument();
-        expect(screen.getByText(/Comments are required./)).toBeInTheDocument();
+        expect(screen.getByText(/Comments is required./)).toBeInTheDocument();
     });
 
     test("No Error messsages on good input", async () => {
@@ -73,10 +73,10 @@ describe("MenuItemReviewForm tests", () => {
         const submitButton = screen.getByTestId("MenuItemReviewForm-submit");
 
         fireEvent.change(itemIdField, { target: { value: '1' } });
-        fireEvent.change(reviewerEmailField, { target: { value: 'cgaucho@ucsb.edu' } });
+        fireEvent.change(reviewerEmailField, { target: { value: 'test@ucsb.edu' } });
         fireEvent.change(starsField, { target: { value: '5' } });
-        fireEvent.change(dateReviewedField, { target: { value: '2022-01-02T12:00:00' } });
-        fireEvent.change(commentsField, { target: { value: 'Good' } });
+        fireEvent.change(dateReviewedField, { target: { value: '2021-08-06T21:31:47.861Z' } });
+        fireEvent.change(commentsField, { target: { value: 'test comment' } });
         fireEvent.click(submitButton);
 
         await waitFor(() => expect(mockSubmitAction).toHaveBeenCalled());
