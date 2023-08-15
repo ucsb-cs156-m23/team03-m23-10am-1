@@ -1,5 +1,3 @@
-import { toast } from "react-toastify";
-
 export function cellToAxiosParamsDelete(cell) {
     return {
         url: "/api/menuitemreview",
